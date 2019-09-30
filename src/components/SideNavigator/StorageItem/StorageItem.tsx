@@ -14,7 +14,7 @@ import { NoteStorage } from '../../../lib/db/types'
 import { useRouter, useNotesPathname } from '../../../lib/router'
 import { values } from '../../../lib/db/utils'
 
-import { mdiNotebook } from '@mdi/js'
+import { mdiNotebook, mdiTrashCan, mdiTagMultiple } from '@mdi/js'
 import Icon from '../../atoms/Icon'
 
 type StorageItemProps = {
@@ -150,15 +150,20 @@ export default (props: StorageItemProps) => {
           )
         })}
       </StyledStorageItemFolderList>
+      <div>
+        <div>
+          <Icon path={mdiTagMultiple} />
+          Tags
+        </div>
+      </div>
       <ul>
         {tags.map(tag => {
-          const tagIsActive =
-            pathname === `/storages/${storageName}/tags/${tag}`
+          const tagIsActive = pathname === `/storages/${id}/tags/${tag}`
           return (
             <li key={tag}>
               <StyledNavLink
                 active={tagIsActive}
-                href={`/storages/${storageName}/tags/${tag}`}
+                href={`/storages/${id}/tags/${tag}`}
               >
                 {tag}
               </StyledNavLink>
@@ -166,6 +171,9 @@ export default (props: StorageItemProps) => {
           )
         })}
       </ul>
+      <StyledNavLink active={active} href={`/storages/${id}/trashcan`}>
+        <Icon path={mdiTrashCan} className='storageIcon' /> Trash can
+      </StyledNavLink>
     </StyledStorageItem>
   )
 }

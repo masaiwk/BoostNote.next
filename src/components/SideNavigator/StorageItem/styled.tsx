@@ -11,6 +11,7 @@ export const StyledStorageItemHeader = styled.header`
   height: 26px;
   display: flex;
   align-items: center;
+  font-weight: bold;
 `
 
 export const StyledStorageItemFolderList = styled.ul`
