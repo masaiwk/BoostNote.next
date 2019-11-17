@@ -2,25 +2,56 @@ import React, { useCallback, KeyboardEvent, useRef } from 'react'
 import NoteItem from './NoteItem'
 import { NoteDoc } from '../../../lib/db/types'
 import styled from '../../../lib/styled'
-import Toolbar from '../../atoms/Toolbar'
-import ToolbarIconButton from '../../atoms/ToolbarIconButton'
 import { mdiMagnify, mdiSquareEditOutline } from '@mdi/js'
-import ToolbarIconInput from '../../atoms/ToolbarIconInput'
+import Icon from '../../atoms/Icon'
+import { borderBottom } from '../../../lib/styled/styleFunctions'
 
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
   height: 100%;
+  outline: none;
   & > ul {
     flex: 1;
     margin: 0;
     padding: 0;
     list-style: none;
     overflow-y: auto;
+
+    li.empty {
+      color: ${({ theme }) => theme.uiTextColor};
+    }
+  }
+
+  .control {
+    height: 50px;
+    display: flex;
+    ${borderBottom}
   }
   .searchInput {
     flex: 1;
+    position: relative;
+    height: 32px;
+    .icon {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      height: 24px;
+      width: 24px;
+      z-index: 0;
+    }
+    .input {
+      position: relative;
+      width: 100%;
+      background-color: transparent;
+      height: 32px;
+      padding-left: 18px;
+      border-radius: 2px;
+      box-sizing: border-box;
+    }
+  }
+  .newNoteButton {
   }
 `
 
@@ -65,15 +96,15 @@ const NoteList = ({
 
   return (
     <StyledContainer>
-      <Toolbar>
-        <ToolbarIconInput
-          className='searchInput'
-          iconPath={mdiMagnify}
-          value={''}
-          onChange={() => {}}
-        />
-        <ToolbarIconButton path={mdiSquareEditOutline} onClick={createNote} />
-      </Toolbar>
+      <div className='control'>
+        <div className='searchInput'>
+          <input className='input' value={''} onChange={() => {}} />
+          <Icon className='icon' path={mdiMagnify} />
+        </div>
+        <button className='newNoteButton' onClick={createNote}>
+          <Icon path={mdiSquareEditOutline} />
+        </button>
+      </div>
       <ul tabIndex={0} onKeyDown={handleListKeyDown} ref={listRef}>
         {notes.map((note, index) => {
           const noteIsCurrentNote = index === currentNoteIndex
@@ -89,8 +120,8 @@ const NoteList = ({
             </li>
           )
         })}
+        {notes.length === 0 && <li className='empty'>No notes</li>}
       </ul>
-      {notes.length === 0 && <p>No notes</p>}
     </StyledContainer>
   )
 }

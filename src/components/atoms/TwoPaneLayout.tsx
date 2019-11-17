@@ -37,7 +37,7 @@ const Pane = styled.div`
 const DividerBorder = styled.div`
   width: 1px;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.borderColor};
 `
 
 const DividerGraple = styled.div`

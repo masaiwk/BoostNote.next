@@ -23,7 +23,7 @@ class ContextMenu extends React.Component<ContextMenuProps> {
 
   closeContextMenuIfMenuBlurred = (event: React.FocusEvent<HTMLDivElement>) => {
     if (this.isMenuBlurred(event.relatedTarget)) {
-      this.closeContextMenu()
+      // this.closeContextMenu()
     }
   }
 

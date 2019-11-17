@@ -15,14 +15,19 @@ import ToolbarIconButton from '../../atoms/ToolbarIconButton'
 import Toolbar from '../../atoms/Toolbar'
 import ToolbarSeparator from '../../atoms/ToolbarSeparator'
 import { GeneralNoteEditModeOptions } from '../../../lib/generalStatus'
+import {
+  secondaryBackgroundColor,
+  textColor,
+  borderBottom
+} from '../../../lib/styled/styleFunctions'
 
 const StyledNoteDetailContainer = styled.div`
+  ${secondaryBackgroundColor}
   display: flex;
   flex-direction: column;
   height: 100%;
   .titleSection {
     display: flex;
-    margin-bottom: 2px;
     input {
       margin: 2px;
       font-size: 24px;
@@ -30,7 +35,11 @@ const StyledNoteDetailContainer = styled.div`
       height: 40px;
       padding: 0 4px;
       flex: 1;
+      background-color: transparent;
+      ${textColor}
     }
+    border-width: 0 0 1px;
+    ${borderBottom}
   }
 
   .tagSection {
@@ -47,9 +56,7 @@ const StyledNoteDetailContainer = styled.div`
   .contentSection {
     flex: 1;
     overflow: hidden;
-    margin: 2px;
     position: relative;
-    border-top: solid 1px ${({ theme }) => theme.colors.border};
     .editor .CodeMirror {
       position: absolute;
       top: 0;
